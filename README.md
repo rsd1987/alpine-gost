@@ -1,14 +1,14 @@
-This dockerfile builds an image of [gost-2.4-dev20170303](https://github.com/ginuerzh/gost/releases) based on [debian:oldstable-slim](https://hub.docker.com/_/debian/)
+This dockerfile builds an image of [gost-2.4-dev20170303](https://github.com/ginuerzh/gost/releases) based on alpine.
 ***
 #### Quick Start
 This image uses ENTRYPOINT to run the containers as an executable.  
-`docker run -d -p 8080:8080 mixool/gost -L=:8080`
+`docker run -d -p 8080:8080 mixool/alpine-gost -L=:8080`
 ***
 #### Create shadowsocks server and client:
 * shadowsocks server  
-`docker run -d -p 8080:8080 mixool/gost -L=ss://aes-128-cfb:password@:8080`
+`docker run -d -p 8080:8080 mixool/alpine-gost -L=ss://aes-128-cfb:password@:8080`
 * shadowsocks client  
-`docker run -d -p 8080:8080 --net=host mixool/gost -L=:8080 -F=ss://aes-128-cfb:password@s_ip:8080`  
+`docker run -d -p 8080:8080 --net=host mixool/alpine-gost -L=:8080 -F=ss://aes-128-cfb:password@s_ip:8080`  
 then try with cURL:  
 `curl -x 127.0.0.1:8080 https://myip.today`
 ***

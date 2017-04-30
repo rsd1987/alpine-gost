@@ -15,7 +15,7 @@ RUN apk upgrade --no-cache \
         /tmp/gost \
         /etc/gost/ \
     && curl -L -H "Cache-Control: no-cache" -o /tmp/gost/gost.tar.gz https://github.com/ginuerzh/gost/releases/download/v2.4-dev/gost_2.4-dev20170303_linux_amd64.tar.gz \
-    && tar -xzf /tmp/gost/gost.tar.gz -d /tmp/gost/ \
+    && tar -xzf /tmp/gost/gost.tar.gz \
     && cp /tmp/gost/gost /root/gost \
     && chmod +x /root/gost \
     && rm -rf /tmp/gost \

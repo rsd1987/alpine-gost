@@ -1,0 +1,5 @@
+FROM frolvlad/alpine-glibc
+
+COPY ./gost /usr/local/bin/gost
+
+ENTRYPOINT ["/usr/local/bin/gost"]

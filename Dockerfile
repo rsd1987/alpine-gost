@@ -10,7 +10,7 @@ RUN apk add --no-cache --virtual=.build-dependencies go gcc git libc-dev ca-cert
     && ls -a \
     && mv $GOPATH/src/github.com/ginuerzh/gost/cmd/gost/* /usr/local/bin/ \
     && cd //usr/local/bin \
-    && ls -a
+    && ls -a \
     && apk del .build-dependencies \
     && rm -rf /tmp
 

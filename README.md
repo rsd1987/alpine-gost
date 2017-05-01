@@ -1,4 +1,4 @@
-This dockerfile builds an image of [gost-2.4-dev20170303](https://github.com/ginuerzh/gost/releases) based on alpine.
+This dockerfile builds an image of [gost](https://github.com/ginuerzh/gost) based on alpine and the image size is 5M.
 ***
 #### Quick Start
 This image uses ENTRYPOINT to run the containers as an executable.  

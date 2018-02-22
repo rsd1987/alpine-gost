@@ -10,5 +10,7 @@ RUN apk add --no-cache --virtual=.build-dependencies go gcc git libc-dev ca-cert
     && mv $GOPATH/src/github.com/ginuerzh/gost/cmd/gost/gost /usr/local/bin/ \
     && apk del .build-dependencies \
     && rm -rf /tmp
+    
+EXPOSE 8080 8088/udp 8338
 
 ENTRYPOINT ["/usr/local/bin/gost"]

@@ -25,5 +25,7 @@ RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases
     && apk del .build-dependencies glibc-i18n \
     && rm -rf /root/.wget-hsts /etc/apk/keys/sgerrand.rsa.pub /root/gost_2.4-dev20170303_linux_amd64.tar.gz \
        $ALPINE_GLIBC_BASE_PACKAGE_FILENAME $ALPINE_GLIBC_BIN_PACKAGE_FILENAME $ALPINE_GLIBC_I18N_PACKAGE_FILENAME 
+       
+EXPOSE 8080 8088/udp 8338
 
 ENTRYPOINT ["/root/gost"]

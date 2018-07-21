@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM debian:jessie
 
 ENV GOST_VERSION="2.4"
 

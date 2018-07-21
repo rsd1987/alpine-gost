@@ -1,16 +1,13 @@
-FROM alpine
+FROM golang:alpine as builder
 
-MAINTAINER mixool0204@gmail.com
+ADD . /go/src/github.com/ginuerzh/gost/
 
-RUN apk add --no-cache --virtual=.build-dependencies go gcc git libc-dev ca-certificates \
-    && export GOPATH=/tmp/go \
-    && git clone https://github.com/ginuerzh/gost $GOPATH/src/github.com/ginuerzh/gost \
-    && cd $GOPATH/src/github.com/ginuerzh/gost/cmd/gost \
-    && go build \
-    && mv $GOPATH/src/github.com/ginuerzh/gost/cmd/gost/gost /usr/local/bin/ \
-    && apk del .build-dependencies \
-    && rm -rf /tmp
-    
-EXPOSE 8080 8088/udp 8338
+RUN go install github.com/ginuerzh/gost/cmd/gost
 
-ENTRYPOINT ["/usr/local/bin/gost"]
+FROM alpine:latest
+
+WORKDIR /bin/
+
+COPY --from=builder /go/bin/gost .
+
+ENTRYPOINT ["/bin/gost"]

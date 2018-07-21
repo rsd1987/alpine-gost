@@ -10,4 +10,7 @@ WORKDIR /bin/
 
 COPY --from=builder /go/bin/gost .
 
-ENTRYPOINT ["/bin/gost"]
+ADD entrypoint.sh /etc/
+
+EXPOSE 8080
+ENTRYPOINT ["/etc/entrypoint.sh"]

@@ -1,15 +1,18 @@
-FROM debian:jessie
+FROM golang:alpine
 
-ENV GOST_VERSION="2.4"
+RUN apk add --update git && \
+    git clone -b master https://github.com/ginuerzh/gost/ /go/src/github.com/ginuerzh/gost && \
+    cd /go/src/github.com/ginuerzh/gost/cmd/gost && \
+    go get ./... && go install github.com/ginuerzh/gost/cmd/gost
+    
+ENV MODE=ws CERT_PEM=none KEY_PEM=none VER=2.5
 
-ADD https://github.com/ginuerzh/gost/releases/download/v${GOST_VERSION}/gost_${GOST_VERSION}_linux_amd64.tar.gz /root/ 
+ADD entrypoint.sh /entrypoint.sh
 
-RUN \
-cd /root && \
-tar xzvf gost_${GOST_VERSION}_linux_amd64.tar.gz && \
-cp /root/gost_${GOST_VERSION}_linux_amd64/gost /bin/
+RUN chgrp -R 0 /go/bin \
+    && chmod -R g+rwX /go/bin \
+    && chmod +x /entrypoint.sh 
 
-ADD entrypoint.sh /etc/
+ENTRYPOINT  /entrypoint.sh 
 
-EXPOSE 443 8080
-ENTRYPOINT ["/etc/entrypoint.sh"]
+EXPOSE 8080
